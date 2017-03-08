@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		<security:global-method-security pre-post-annotations="enabled" />
+		<beans:import resource="servlet-context.xml"/>				
+		<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/login/**" access="permitAll()"  />
+		<!-- <security:intercept-url pattern="/**" access="isAuthenticated()" /> --><!--it means all URL in this app will be checked if user is authenticated  -->
+			<!-- <security:form-login/> --> <!-- we will just use the built-in form login page in Spring -->
+			<!-- <security:form-login login-page="/login" authentication-failure-url="/login?error"
+                    username-parameter="username" password-parameter="password" />                    
+			<security:logout logout-url="/logout" logout-success-url="/"/> -->
+			
+		<security:form-login
+		    login-page="/login"
+		    default-target-url="/welcome"  		    
+			authentication-failure-url="/login?error"
+			username-parameter="emailId"
+			password-parameter="password" 
+			always-use-default-target="true"/>
+		<security:logout logout-success-url="/login?logout" />	
+		<!-- <security:csrf/> -->
+		
+		</security:http>	
+		
+		<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userDetailsService" ></security:authentication-provider>
+			<!-- <security:authentication-provider> -->
+			<!--Normally, In this part, you will declare source of your users, But for siplicity
+			    we will hard-code the user, this is very usefull  while testing setup-->
+			    <!-- <security:user-service>
+				    <security:user name="Sachin" password="sachinm123" authorities="Admin,User"/>
+				    <security:user name="Satishm" password="sattu" authorities="User"/>				    
+			    </security:user-service> -->
+			<!-- </security:authentication-provider> -->
+		</security:authentication-manager>
+</beans:beans>
