@@ -13,5 +13,4 @@ public class MyRunnable implements Runnable{
 		}
 		System.out.println("Thread Ended ::"+Thread.currentThread().getName());
 	}
-
 }

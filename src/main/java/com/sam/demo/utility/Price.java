@@ -8,7 +8,9 @@ public class Price {
 	        this.item = itm;
 	        this.price = pr;
 	    }
-	     
+	    
+	    /* for using an object as key in hashmap we should override the 
+	       hashCode() and equals() method compulsarily*/  
 	    public int hashCode(){
 	        System.out.println("In hashcode");
 	        int hashcode = 0;

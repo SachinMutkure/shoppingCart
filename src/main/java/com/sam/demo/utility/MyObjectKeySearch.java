@@ -15,6 +15,7 @@ public class MyObjectKeySearch {
         
         Price key = new Price("Banana", 20);
         System.out.println("Does key available? "+hm.containsKey(key));
+        printMap(hm);//call method
         
     }     
 

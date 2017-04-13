@@ -6,10 +6,10 @@ package com.thread.sleepMethod;
  *
  */
 public class LambdaExpressionExample {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Sylable s =()->{
 			return "I have nothing to say";
 		};
 		System.out.println(s.say());
-	}
+	}*/
 }

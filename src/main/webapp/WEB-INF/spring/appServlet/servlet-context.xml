@@ -24,7 +24,7 @@
 	<context:component-scan base-package="com.sam.demo" />
 	<!-- Enables the Spring MVC @Controller programming model -->
 
-
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources location="/resources/images/" mapping="/images/**" />
@@ -41,6 +41,23 @@
 		<beans:property name="order" value="1"/>
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- Below Code used for Webservice Response Generator -->
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jsonMessageConverter"/>
+				<beans:ref bean="xmlMessageConverter"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</beans:bean>	
+	
+	<beans:bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
 	</beans:bean>
 	
 	<beans:bean id="dataSource"
@@ -69,6 +86,27 @@
 	<beans:bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
-	</beans:bean>	
+	</beans:bean>
+	
+	<!-- property file include here -->	
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:studentmessages"/>
+	</beans:bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/welcomeReg"/>		
+			<beans:bean class="com.sam.demo.DaysOfWeekBasedAccessInterceptor"/>
+		</mvc:interceptor>		
+		
+		<!-- 2nd change This Interceptor for Localization and Internationalization  -->
+		<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="siteLanguage"/>
+		</beans:bean>		
+	</mvc:interceptors>
+	
+	
+	<!-- 3rd change for Localization and Internationalization -->
+	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 		
 </beans:beans>

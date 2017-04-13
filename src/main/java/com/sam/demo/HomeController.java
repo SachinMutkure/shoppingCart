@@ -1,7 +1,6 @@
 package com.sam.demo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,7 +26,6 @@ import com.sam.demo.model.UserRegistrationEntity;
 import com.sam.demo.service.ShoppingCartService;
 import com.sam.demo.utility.CandidateDetails;
 import com.sam.demo.utility.ConstantUtil;
-import com.thread.joinMethod.MyInterfaceOne;
 
 /**
  * Handles requests for the application home page.
@@ -48,12 +46,17 @@ public class HomeController {
 		
 	@Autowired
 	public HttpSession httpSession;
+	
+	@Autowired
+	public ProductDto productDto;
 
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 			
 		LOG.info("Welcome home! The client locale is {}.", locale);
 		model.addAttribute("Categorylist", shoppingCartService.getCategoryList());
+		productDto.setCategoryName("Set category name:Sachin");
+		System.out.println(productDto.getCategoryName());
 		UserRegistrationEntity auth = (UserRegistrationEntity) httpSession.getAttribute("userAuthentication");
 		LOG.info("User Authentication:" + auth);
 		

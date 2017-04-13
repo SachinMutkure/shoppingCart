@@ -1,10 +1,17 @@
 package com.sam.demo.dto;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 /**
  * 
  * @author webwerks
  *
  */
+@Component
+//@Service
+//@Repository
 public class ProductDto {
 
 	private Integer id;
