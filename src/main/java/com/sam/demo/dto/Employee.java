@@ -13,24 +13,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonIgnoreProperties({"empAddress","designation"}) 
-//@JsonPropertyOrder({"id","empid","emp_name","empAddress","designation"})
-@XmlRootElement(name="employee")
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"empAddress","designation"}) 
+@JsonPropertyOrder({"id","empid","emp_name","empAddress","designation"})
+//@XmlRootElement(name="employee")
+//@XmlAccessorType(XmlAccessType.NONE)
 public class Employee implements Serializable{
 	
 	 
-	@XmlAttribute
+	//@XmlAttribute
     private Integer id;
      
-    @XmlElement
+    //@XmlElement
     private String firstName;
      
-    @XmlElement
+    //@XmlElement
     private String lastName;
      
-    @XmlElement
+    //@XmlElement
     private String email;
 
 	public Employee(Integer id, String firstName, String lastName, String email) {
@@ -43,9 +43,7 @@ public class Employee implements Serializable{
 
 	public Employee() {
 		super();
-	}
-
-	
+	}	
 	
 	public Integer getId() {
 		return id;

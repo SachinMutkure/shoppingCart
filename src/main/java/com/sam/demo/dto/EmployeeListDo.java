@@ -7,7 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="employees") 
+//@XmlRootElement(name="employees") 
 public class EmployeeListDo implements Serializable{
 
 	/**
